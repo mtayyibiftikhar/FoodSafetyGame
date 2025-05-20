@@ -157,92 +157,91 @@
       <p>World Food Safety Day 2025</p>
     </div>
   </header>
-  <div class="content">
-    <div class="card" id="startPage">
-      <h2>Welcome to the Food Safety Quiz</h2>
-      <p>Please enter your name and email to begin:</p>
-      <div class="form-wrapper">
-        <div class="form-fields">
-          <input type="text" id="name" placeholder="Your Name" required><br>
-          <input type="email" id="email" placeholder="Your Email" required><br>
-          <button onclick="startQuiz()">Start Quiz</button>
-        </div>
-        <img src="img/6.jpg" alt="Food Safety Illustration">
+<div class="content">
+  <div class="card" id="startPage">
+    <h2>Welcome to the Food Safety Quiz</h2>
+    <p>Please enter your name and email to begin:</p>
+    <div class="form-wrapper">
+      <div class="form-fields">
+        <input type="text" id="name" placeholder="Your Name" required><br>
+        <input type="email" id="email" placeholder="Your Email" required><br>
+        <button onclick="startQuiz()">Start Quiz</button>
       </div>
-    </div>
-
-    <div class="card hidden" id="quizPage">
-      <div class="quiz-wrapper">
-        <div class="quiz-content">
-          <h2 id="questionTitle"></h2>
-          <p id="questionText"></p>
-          <button onclick="checkAnswer('yes')">Yes</button>
-          <button onclick="checkAnswer('no')">No</button>
-          <div class="feedback" id="feedback"></div>
-          <div id="explanation" class="hidden">
-            <p id="explanationText"></p>
-            <button onclick="nextQuestion()">Next</button>
-          </div>
-        </div>
-        <img id="questionImage" src="" alt="Question Image">
-      </div>
-    </div>
-
-    <div class="card hidden" id="endPage">
-      <div class="end-wrapper">
-        <div class="end-content">
-          <h2>Thank You!</h2>
-          <p>💫 You've completed the Food Safety Quiz! </br>
-            🧁 Please enjoy a treat and pick a gift from the box.</br>
-            🍿 Brought to you by
-          </br>🙋Tamimi QC at KAUST.</p>
-        </div>
-        <img src="img/7.jpg" alt="Success Celebration Image">
-      </div>
+      <img src="img/6.jpg" alt="Food Safety Illustration">
     </div>
   </div>
+
+  <div class="card hidden" id="quizPage">
+    <div class="quiz-wrapper">
+      <div class="quiz-content">
+        <h2 id="questionTitle"></h2>
+        <p id="questionText"></p>
+        <button onclick="checkAnswer('yes')">Yes</button>
+        <button onclick="checkAnswer('no')">No</button>
+        <div class="feedback" id="feedback"></div>
+        <div id="explanation" class="hidden">
+          <p id="explanationText"></p>
+          <button onclick="nextQuestion()">Next</button>
+        </div>
+      </div>
+      <img id="questionImage" src="" alt="Question Image">
+    </div>
+  </div>
+
+  <div class="card hidden" id="endPage">
+    <div class="end-wrapper">
+      <div class="end-content">
+        <h2>Thank You!</h2>
+        <p>💫 You've completed the Food Safety Quiz! </br>
+          🧁 Please enjoy a treat and pick a gift from the box.</br>
+          🍿 Brought to you by </br>🙋 Tamimi QC at KAUST.</p>
+      </div>
+      <img src="img/7.jpg" alt="Success Celebration Image">
+    </div>
+  </div>
+</div>
   <footer>
     Made with ❤️ by <a href="mailto:tayyibiftikhar@mail.com?subject=query">Muhammad Tayyib</a> &copy; 2025
   </footer>
 
   <script>
-  const questions = [
-  {
-    title: "Question 1",
-    image: "img/question1.jpg",
-    text: "Can I get sick from food I ate 3 days ago?",
-    correct: "yes",
-    explanation: "Some harmful microorganisms take longer than a few hours to make you sick."
-  },
-  {
-    title: "Question 2",
-    image: "img/question2.jpg",
-    text: "Is it safe to thaw frozen food at room temperature?",
-    correct: "no",
-    explanation: "Thawing food in the refrigerator or in cold water prevents the growth of microorganisms."
-  },
-  {
-    title: "Question 3",
-    image: "img/question3.jpg",
-    text: "Do fruits and vegetables need to be washed before peeling?",
-    correct: "yes",
-    explanation: "Washing with clean water removes soil and other contaminants."
-  },
-  {
-    title: "Question 4",
-    image: "img/question4.jpg",
-    text: "Is food dropped on the floor OK to eat if you pick it up within 5 seconds?",
-    correct: "no",
-    explanation: "Microorganisms can transfer to food immediately and cause disease."
-  },
-  {
-    title: "Question 5",
-    image: "img/question5.jpg",
-    text: "Can you tell if food is safe to eat by its look and smell?",
-    correct: "no",
-    explanation: "Most microorganisms that make you sick don't change the look or smell of the food."
-  }
-];
+    const questions = [
+      {
+        title: "Question 1",
+        image: "img/question1.jpg",
+        text: "Can I get sick from food I ate 3 days ago?",
+        correct: "yes",
+        explanation: "Some harmful microorganisms take longer than a few hours to make you sick."
+      },
+      {
+        title: "Question 2",
+        image: "img/question2.jpg",
+        text: "Is it safe to thaw frozen food at room temperature?",
+        correct: "no",
+        explanation: "Thawing food in the refrigerator or in cold water prevents the growth of microorganisms."
+      },
+      {
+        title: "Question 3",
+        image: "img/question3.jpg",
+        text: "Do fruits and vegetables need to be washed before peeling?",
+        correct: "yes",
+        explanation: "Washing with clean water removes soil and other contaminants."
+      },
+      {
+        title: "Question 4",
+        image: "img/question4.jpg",
+        text: "Is food dropped on the floor OK to eat if you pick it up within 5 seconds?",
+        correct: "no",
+        explanation: "Microorganisms can transfer to food immediately and cause disease."
+      },
+      {
+        title: "Question 5",
+        image: "img/question5.jpg",
+        text: "Can you tell if food is safe to eat by its look and smell?",
+        correct: "no",
+        explanation: "Most microorganisms that make you sick don't change the look or smell of the food."
+      }
+    ];
 
     let currentQuestion = 0;
 
