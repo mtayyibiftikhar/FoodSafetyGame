@@ -1,1 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Safety Quiz</title>
+  <style>
+    html, body {
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #f9f9f9, #e0f7fa);
+      overflow: hidden;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+    }
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    header img {
+      height: 100px;
+    }
+    header .header-text {
+      text-align: left;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2em;
+      letter-spacing: 1px;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.1em;
+      font-style: italic;
+    }
+    .card {
+      background: white;
+      width: 90%;
+      max-width: 900px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .form-wrapper, .quiz-wrapper, .end-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .form-wrapper img,
+    .quiz-wrapper img,
+    .end-wrapper img {
+      max-width: 300px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .form-fields, .quiz-content, .end-content {
+      flex-grow: 1;
+      min-width: 250px;
+    }
+    input[type="text"], input[type="email"] {
+      padding: 10px;
+      margin: 8px 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    button {
+      background-color: #388e3c;
+      color: white;
+      padding: 12px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+    button:hover {
+      background-color: #2e7d32;
+    }
+    .hidden {
+      display: none;
+    }
+    .feedback {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .correct {
+      color: green;
+    }
+    .incorrect {
+      color: red;
+    }
+    footer {
+      background-color: #1b5e20;
+      color: white;
+      text-align: center;
+      padding: 15px 10px;
+      font-size: 0.95em;
+    }
+    footer a {
+      color: #ffccbc;
+      text-decoration: none;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="img/logo.png" alt="Tamimi Logo">
+    <div class="header-text">
+      <h1>TAMIMI GLOBAL</h1>
+      <p>World Food Safety Day 2025</p>
+    </div>
+  </header>
+  <div class="content">
+    <div class="card" id="startPage">
+      <h2>Welcome to the Food Safety Quiz</h2>
+      <p>Please enter your name and email to begin:</p>
+      <div class="form-wrapper">
+        <div class="form-fields">
+          <input type="text" id="name" placeholder="Your Name" required><br>
+          <input type="email" id="email" placeholder="Your Email" required><br>
+          <button onclick="startQuiz()">Start Quiz</button>
+        </div>
+        <img src="img/6.jpg" alt="Food Safety Illustration">
+      </div>
+    </div>
 
+    <div class="card hidden" id="quizPage">
+      <div class="quiz-wrapper">
+        <div class="quiz-content">
+          <h2 id="questionTitle"></h2>
+          <p id="questionText"></p>
+          <button onclick="checkAnswer('yes')">Yes</button>
+          <button onclick="checkAnswer('no')">No</button>
+          <div class="feedback" id="feedback"></div>
+          <div id="explanation" class="hidden">
+            <p id="explanationText"></p>
+            <button onclick="nextQuestion()">Next</button>
+          </div>
+        </div>
+        <img id="questionImage" src="" alt="Question Image">
+      </div>
+    </div>
+
+    <div class="card hidden" id="endPage">
+      <div class="end-wrapper">
+        <div class="end-content">
+          <h2>Thank You!</h2>
+          <p>💫 You've completed the Food Safety Quiz! </br>
+            🧁 Please enjoy a treat and pick a gift from the box.</br>
+            🍿 Brought to you by
+          </br>🙋Tamimi QC at KAUST.</p>
+        </div>
+        <img src="img/7.jpg" alt="Success Celebration Image">
+      </div>
+    </div>
+  </div>
+  <footer>
+    Made with ❤️ by <a href="mailto:tayyibiftikhar@mail.com?subject=query">Muhammad Tayyib</a> &copy; 2025
+  </footer>
+
+  <script>
+  const questions = [
+  {
+    title: "Question 1",
+    image: "img/question1.jpg",
+    text: "Can I get sick from food I ate 3 days ago?",
+    correct: "yes",
+    explanation: "Some harmful microorganisms take longer than a few hours to make you sick."
+  },
+  {
+    title: "Question 2",
+    image: "img/question2.jpg",
+    text: "Is it safe to thaw frozen food at room temperature?",
+    correct: "no",
+    explanation: "Thawing food in the refrigerator or in cold water prevents the growth of microorganisms."
+  },
+  {
+    title: "Question 3",
+    image: "img/question3.jpg",
+    text: "Do fruits and vegetables need to be washed before peeling?",
+    correct: "yes",
+    explanation: "Washing with clean water removes soil and other contaminants."
+  },
+  {
+    title: "Question 4",
+    image: "img/question4.jpg",
+    text: "Is food dropped on the floor OK to eat if you pick it up within 5 seconds?",
+    correct: "no",
+    explanation: "Microorganisms can transfer to food immediately and cause disease."
+  },
+  {
+    title: "Question 5",
+    image: "img/question5.jpg",
+    text: "Can you tell if food is safe to eat by its look and smell?",
+    correct: "no",
+    explanation: "Most microorganisms that make you sick don't change the look or smell of the food."
+  }
+];
+
+    let currentQuestion = 0;
+
+    function startQuiz() {
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!name || !email) {
+        alert('Please enter your name and email.');
+        return;
+      }
+
+      fetch("https://script.google.com/macros/s/AKfycbyXpz8pyoy35_isFE4Re4v35tCouL1MFpWtQ7WUeg5uA-4xY-y2UVJ9jGIosI3c6_EC/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}`
+      });
+
+      document.getElementById('startPage').classList.add('hidden');
+      document.getElementById('quizPage').classList.remove('hidden');
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = questions[currentQuestion];
+      document.getElementById('questionTitle').textContent = q.title;
+      document.getElementById('questionText').textContent = q.text;
+      document.getElementById('questionImage').src = q.image;
+      document.getElementById('feedback').textContent = '';
+      document.getElementById('feedback').className = 'feedback';
+      document.getElementById('explanation').classList.add('hidden');
+    }
+
+    function checkAnswer(answer) {
+      const q = questions[currentQuestion];
+      const feedback = document.getElementById('feedback');
+      if (answer === q.correct) {
+        feedback.textContent = '✅ Correct!';
+        feedback.classList.add('correct');
+        document.getElementById('explanationText').textContent = q.explanation;
+        document.getElementById('explanation').classList.remove('hidden');
+      } else {
+        feedback.textContent = '❌ Incorrect! Try again.';
+        feedback.classList.add('incorrect');
+        document.getElementById('explanation').classList.add('hidden');
+      }
+    }
+
+    function nextQuestion() {
+      currentQuestion++;
+      if (currentQuestion >= questions.length) {
+        document.getElementById('quizPage').classList.add('hidden');
+        document.getElementById('endPage').classList.remove('hidden');
+      } else {
+        loadQuestion();
+      }
+    }
+  </script>
+</body>
+</html>
