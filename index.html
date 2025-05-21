@@ -6,53 +6,49 @@
   <title>Food Safety Quiz</title>
   <style>
     html {
-  box-sizing: border-box;
-  height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to bottom, #f9f9f9, #e0f7fa);
-}
+      box-sizing: border-box;
+      height: 100%;
+    }
     body {
       display: flex;
       flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #f9f9f9, #e0f7fa);
     }
     .content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 20px 0;
-}
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px 0;
+    }
     header {
-  background-color: #2e7d32;
-  color: white;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
+      background-color: #2e7d32;
+      color: white;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
     header img {
-  height: 70px;
-  margin-right: 10px;
-}
+      height: 70px;
+      margin-right: 10px;
+    }
     header .header-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  text-align: left;
-}
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      text-align: left;
+    }
     header h1 {
       margin: 0;
       font-size: 2em;
@@ -95,6 +91,11 @@ body {
       flex-grow: 1;
       min-width: 250px;
     }
+    .end-content p {
+      font-size: 1.25em;
+      color: #2e7d32;
+      line-height: 1.6;
+    }
     input[type="text"], input[type="email"] {
       padding: 10px;
       margin: 8px 0;
@@ -107,17 +108,32 @@ body {
       background-color: #388e3c;
       color: white;
       padding: 12px 20px;
-      font-size: 1em;
+      font-size: 1.1em;
+      font-weight: bold;
       border: none;
       border-radius: 5px;
       cursor: pointer;
-      margin-top: 15px;
+      margin: 10px 8px 0;
+      transition: background-color 0.3s ease;
     }
     button:hover {
       background-color: #2e7d32;
+      transform: scale(1.02);
     }
     .hidden {
       display: none;
+    }
+    h2#questionTitle {
+      font-size: 1.8em;
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+    #questionText {
+      font-size: 1.25em;
+      color: #2c3e50;
+      margin: 12px 0 24px;
+      line-height: 1.6;
+      font-weight: 500;
     }
     .feedback {
       margin-top: 15px;
@@ -131,10 +147,10 @@ body {
       color: red;
     }
     footer {
-  position: sticky;
-  bottom: 0;
-  z-index: 1000;
-  flex-shrink: 0;
+      position: sticky;
+      bottom: 0;
+      z-index: 1000;
+      flex-shrink: 0;
       background-color: #1b5e20;
       color: white;
       text-align: center;
@@ -148,8 +164,6 @@ body {
     footer a:hover {
       text-decoration: underline;
     }
-
-    /* Responsive layout */
     @media (max-width: 768px) {
       header {
         flex-direction: column;
@@ -173,85 +187,79 @@ body {
       <p>World Food Safety Day 2025</p>
     </div>
   </header>
-<div class="content">
-  <div class="card" id="startPage">
-    <h2>Welcome to the Food Safety Quiz</h2>
-    <p>Please enter your name and email to begin:</p>
-    <div class="form-wrapper">
-      <div class="form-fields">
-        <input type="text" id="name" placeholder="Your Name" required><br>
-        <input type="email" id="email" placeholder="Your Email" required><br>
-        <button onclick="startQuiz()">Start Quiz</button>
-      </div>
-      <img src="img/6.jpg" alt="Food Safety Illustration">
-    </div>
-  </div>
-
-  <div class="card hidden" id="quizPage">
-    <div class="quiz-wrapper">
-      <div class="quiz-content">
-        <h2 id="questionTitle"></h2>
-        <p id="questionText"></p>
-        <button onclick="checkAnswer('yes')">Yes</button>
-        <button onclick="checkAnswer('no')">No</button>
-        <div class="feedback" id="feedback"></div>
-        <div id="explanation" class="hidden">
-          <p id="explanationText"></p>
-          <button onclick="nextQuestion()">Next</button>
+  <div class="content">
+    <div class="card" id="startPage">
+      <h2>Welcome to the Food Safety Quiz</h2>
+      <p>Please enter your name and email to begin:</p>
+      <div class="form-wrapper">
+        <div class="form-fields">
+          <input type="text" id="name" placeholder="Your Name" required><br>
+          <input type="email" id="email" placeholder="Your Email" required><br>
+          <button onclick="startQuiz()">Start Quiz</button>
         </div>
+        <img src="img/6.jpg" alt="Food Safety Illustration">
       </div>
-      <img id="questionImage" src="" alt="Question Image">
     </div>
-  </div>
 
-  <div class="card hidden" id="endPage">
-    <div class="end-wrapper">
-      <div class="end-content">
-        <h2>Thank You!</h2>
-        <p>💫 You've completed the Food Safety Quiz! </br>
-          🧁 Please enjoy a treat and pick a gift from the box.</br>
-          🍿 Brought to you by </br>🙋 Tamimi QC at KAUST.</p>
+    <div class="card hidden" id="quizPage">
+      <div class="quiz-wrapper">
+        <div class="quiz-content">
+          <h2 id="questionTitle"></h2>
+          <p id="questionText"></p>
+          <button onclick="checkAnswer('yes')" style="background-color: #43a047;">Yes</button>
+          <button onclick="checkAnswer('no')" style="background-color: #e57373;">No</button>
+          <div class="feedback" id="feedback"></div>
+          <div id="explanation" class="hidden">
+            <p id="explanationText" style="color: #2e7d32; font-size: 1.1em; font-weight: 500;"></p>
+            <button onclick="nextQuestion()">Next</button>
+          </div>
+        </div>
+        <img id="questionImage" src="" alt="Question Image">
       </div>
-      <img src="img/7.jpg" alt="Success Celebration Image">
+    </div>
+
+    <div class="card hidden" id="endPage">
+      <div class="end-wrapper">
+        <div class="end-content">
+          <h2>Thank You!</h2>
+          <p>💫 You've completed the Food Safety Quiz! </br>
+            🧁 Please enjoy a treat and pick a gift from the box.</br>
+            🍿 Brought to you by </br>🙋 Tamimi QC at KAUST.</p>
+        </div>
+        <img src="img/7.jpg" alt="Success Celebration Image">
+      </div>
     </div>
   </div>
-</div>
   <footer>
     Made with ❤️ by <a href="mailto:tayyibiftikhar@mail.com?subject=query">Muhammad Tayyib</a> &copy; 2025
   </footer>
-
   <script>
     const questions = [
       {
-        title: "Question 1",
         image: "img/question1.jpg",
         text: "Can I get sick from food I ate 3 days ago?",
         correct: "yes",
         explanation: "Some harmful microorganisms take longer than a few hours to make you sick."
       },
       {
-        title: "Question 2",
         image: "img/question2.jpg",
         text: "Is it safe to thaw frozen food at room temperature?",
         correct: "no",
         explanation: "Thawing food in the refrigerator or in cold water prevents the growth of microorganisms."
       },
       {
-        title: "Question 3",
         image: "img/question3.jpg",
         text: "Do fruits and vegetables need to be washed before peeling?",
         correct: "yes",
         explanation: "Washing with clean water removes soil and other contaminants."
       },
       {
-        title: "Question 4",
         image: "img/question4.jpg",
         text: "Is food dropped on the floor OK to eat if you pick it up within 5 seconds?",
         correct: "no",
         explanation: "Microorganisms can transfer to food immediately and cause disease."
       },
       {
-        title: "Question 5",
         image: "img/question5.jpg",
         text: "Can you tell if food is safe to eat by its look and smell?",
         correct: "no",
@@ -264,8 +272,9 @@ body {
     function startQuiz() {
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
-      if (!name || !email) {
-        alert('Please enter your name and email.');
+      const emailRegex = /^\S+@\S+\.\S+$/;
+      if (!name || !email || !emailRegex.test(email)) {
+        alert('Please enter a valid name and email address.');
         return;
       }
 
@@ -284,7 +293,7 @@ body {
 
     function loadQuestion() {
       const q = questions[currentQuestion];
-      document.getElementById('questionTitle').textContent = q.title;
+      document.getElementById('questionTitle').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
       document.getElementById('questionText').textContent = q.text;
       document.getElementById('questionImage').src = q.image;
       document.getElementById('feedback').textContent = '';
